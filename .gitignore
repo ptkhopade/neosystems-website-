@@ -1,0 +1,16 @@
+# Local authoring and generated deliverables
+tmp/
+output/
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python cache used by the optional static checker
+__pycache__/
+*.py[cod]

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" role="img" aria-label="Neo Systems">
+  <rect width="56" height="56" rx="12" fill="#071431"/>
+  <path d="M15 40V16l26 24V16" fill="none" stroke="#57D7DC" stroke-width="6" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M15 40h26" fill="none" stroke="#F4B942" stroke-width="3" stroke-linecap="square"/>
+</svg>
