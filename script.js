@@ -18,6 +18,14 @@ if (homeLink && !nav.querySelector('a[href="about.html"]')) {
   homeLink.after(aboutLink);
 }
 
+if (!nav.querySelector('a[href="digital-launch.html"]')) {
+  const digitalLaunchLink = document.createElement('a');
+  digitalLaunchLink.href = 'digital-launch.html';
+  digitalLaunchLink.textContent = 'Digital Launch';
+  const servicesLink = nav.querySelector('a[href="services.html"]');
+  if (servicesLink) servicesLink.after(digitalLaunchLink);
+}
+
 toggle.addEventListener('click', () => {
   const isOpen = nav.classList.toggle('open');
   toggle.classList.toggle('is-open', isOpen);
@@ -90,7 +98,7 @@ if (window.location.pathname.endsWith('/contact.html') && contactMain) {
         <a href="services.html"><span>01</span><strong>CCTV & surveillance services</strong><b>↗</b></a>
         <a href="services.html#planning"><span>02</span><strong>Planning & procurement guidance</strong><b>↗</b></a>
         <a href="neotimex.html"><span>03</span><strong>NeoTimex product enquiries</strong><b>↗</b></a>
-        <div class="contact-approval"><strong>Contact channels pending approval</strong><p>Approved phone, email and business-address details will be added before launch.</p></div>
+        <div class="contact-approval"><strong>Contact Neo Systems</strong><p><a href="tel:+917499711255">+91 74997 11255</a><br /><a href="mailto:info.neosystems@gmail.com">info.neosystems@gmail.com</a><br /><a href="https://wa.me/917499711255?text=Hello%20Neo%20Systems%2C%20I%20would%20like%20to%20discuss%20a%20requirement." target="_blank" rel="noopener noreferrer">Message us on WhatsApp ↗</a></p><p><strong>Visit us</strong><br />Avadhoot Complex, Shop No. 2, Sr. No. 32/11, Ambegaon Pathar Road, Bharati Vidyapeeth, Pune - 411 046.</p></div>
       </aside>
       <section class="inquiry-panel" aria-labelledby="inquiry-title">
         <p class="section-kicker">Inquiry details</p>
