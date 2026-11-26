@@ -55,7 +55,14 @@
             </div>
           </div>
           <figure class="hero-visual">
-            <img src="assets/surveillance-hero.jpg" width="1440" height="810" fetchpriority="high" alt="Conceptual CCTV cameras connected to a modern monitoring environment." />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="assets/home/security-enterprise-800.webp 800w, assets/home/security-enterprise-1360.webp 1360w"
+                sizes="(max-width: 760px) 100vw, 52vw"
+              />
+              <img src="assets/surveillance-hero.jpg" width="1440" height="810" fetchpriority="high" decoding="async" alt="Representative commercial entrance with CCTV, access control and network infrastructure." />
+            </picture>
             <figcaption><span class="note-number">01</span><p>Service-led surveillance support, from system planning through ongoing upkeep.</p></figcaption>
           </figure>
         </div>
@@ -71,32 +78,32 @@
           Professional planning, deployment coordination and ongoing support for security and essential workplace technology systems.
         </p>
         <div class="service-grid">
-          <article>
+          <article data-service="neotimex">
             <span>01</span>
             <h3>NeoTimex</h3>
             <p>Mobile-based, cost-conscious time attendance for organisations exploring a simpler attendance workflow.</p>
           </article>
-          <article>
+          <article class="service-card-security" data-service="cctv">
             <span>02</span>
             <h3>CCTV & IP camera surveillance</h3>
             <p>Site-aware camera planning aligned to coverage priorities, workflows and future needs.</p>
           </article>
-          <article>
+          <article data-service="access-control">
             <span>03</span>
             <h3>Access control systems</h3>
             <p>Practical support for defining controlled-entry requirements and a usable system handover.</p>
           </article>
-          <article>
+          <article data-service="video-door-phone">
             <span>04</span>
             <h3>Video door phones</h3>
             <p>Guidance for visitor communication and entry systems that suit the way your site operates.</p>
           </article>
-          <article>
+          <article data-service="computer-hardware">
             <span>05</span>
             <h3>Computer hardware</h3>
             <p>Professional assistance for the hardware foundation required by your operational setup.</p>
           </article>
-          <article>
+          <article data-service="networking">
             <span>06</span>
             <h3>Networking</h3>
             <p>Planning and deployment support for the dependable network infrastructure your systems rely on.</p>

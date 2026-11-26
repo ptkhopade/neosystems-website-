@@ -5,6 +5,11 @@ window.addEventListener('pageshow', () => requestAnimationFrame(scrollToPageTop)
 
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#site-nav');
+const header = document.querySelector('.site-header');
+
+const updateHeaderElevation = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
+updateHeaderElevation();
+window.addEventListener('scroll', updateHeaderElevation, { passive: true });
 
 toggle.type = 'button';
 toggle.setAttribute('aria-label', 'Open menu');
@@ -26,6 +31,24 @@ if (!nav.querySelector('a[href="digital-launch.html"]')) {
   if (servicesLink) servicesLink.after(digitalLaunchLink);
 }
 
+if (!nav.querySelector('.mobile-call-link')) {
+  const mobileCallLink = document.createElement('a');
+  mobileCallLink.className = 'mobile-call-link';
+  mobileCallLink.href = 'tel:+917499711255';
+  mobileCallLink.innerHTML = '<span>Call Neo Systems</span>+91 7499711255';
+  nav.appendChild(mobileCallLink);
+}
+
+if (!nav.querySelector('.mobile-whatsapp-link')) {
+  const mobileWhatsAppLink = document.createElement('a');
+  mobileWhatsAppLink.className = 'mobile-whatsapp-link';
+  mobileWhatsAppLink.href = 'https://wa.me/917499711255?text=Hello%20Neo%20Systems%2C%20I%20would%20like%20to%20discuss%20a%20requirement.';
+  mobileWhatsAppLink.target = '_blank';
+  mobileWhatsAppLink.rel = 'noopener noreferrer';
+  mobileWhatsAppLink.innerHTML = '<span>WhatsApp Neo Systems</span>+91 7499711255';
+  nav.appendChild(mobileWhatsAppLink);
+}
+
 toggle.addEventListener('click', () => {
   const isOpen = nav.classList.toggle('open');
   toggle.classList.toggle('is-open', isOpen);
@@ -39,6 +62,83 @@ nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () =>
   toggle.setAttribute('aria-expanded', 'false');
   toggle.setAttribute('aria-label', 'Open menu');
 }));
+
+const serviceDetails = {
+  neotimex: {
+    title: 'NeoTimex',
+    intro: 'A practical starting point for organisations reviewing how attendance information is captured, reviewed and reported.',
+    focus: 'Begin with the current attendance workflow, the information managers need and the operational questions that matter most.',
+    approach: 'NSIPL can help frame the discussion around rollout considerations, working practices and a verified product scope before a proposal or pilot is defined.'
+  },
+  cctv: {
+    title: 'CCTV & IP Camera Surveillance',
+    intro: 'Clear site visibility starts with a coverage plan built around the way a location actually operates.',
+    focus: 'Review entry and exit points, critical work areas, perimeter priorities, lighting conditions and the level of oversight required.',
+    approach: 'NSIPL supports requirement definition, system planning, deployment coordination and a practical handover approach for surveillance projects.'
+  },
+  'access-control': {
+    title: 'Access Control Systems',
+    intro: 'Controlled entry should support both security requirements and the day-to-day movement of people through a site.',
+    focus: 'Clarify which areas need controlled access, how user permissions should be managed and what a usable handover requires.',
+    approach: 'NSIPL can help structure the scope for access-control planning, setup and operational readiness.'
+  },
+  'video-door-phone': {
+    title: 'Video Door Phones',
+    intro: 'Visitor communication and entry control work best when they reflect the layout and routines of the premises.',
+    focus: 'Consider visitor verification, internal communication points, entrance conditions and the experience required for staff and guests.',
+    approach: 'NSIPL provides guidance for defining a video door-phone requirement that fits the operating environment.'
+  },
+  'computer-hardware': {
+    title: 'Computer Hardware',
+    intro: 'Reliable workplace technology begins with a clear understanding of the work each device needs to support.',
+    focus: 'Discuss the operational use case, user needs, compatibility considerations and the support expectations around the hardware foundation.',
+    approach: 'NSIPL can help clients assess suitable options and establish a practical procurement and support conversation.'
+  },
+  networking: {
+    title: 'Networking & Infrastructure',
+    intro: 'Dependable security systems and workplace technology rely on a network planned for the environment it serves.',
+    focus: 'Review connectivity requirements, equipment locations, cabling routes, future expansion needs and the systems that depend on the network.',
+    approach: 'NSIPL helps bring structure to network-infrastructure planning and deployment discussions before project scope is finalised.'
+  }
+};
+
+const serviceCards = document.querySelectorAll('[data-service]');
+if (serviceCards.length) {
+  const serviceDialog = document.createElement('dialog');
+  serviceDialog.className = 'service-dialog';
+  serviceDialog.setAttribute('aria-labelledby', 'service-dialog-title');
+  document.body.appendChild(serviceDialog);
+
+  const showServiceDetail = (serviceKey) => {
+    const detail = serviceDetails[serviceKey];
+    if (!detail) return;
+    serviceDialog.innerHTML = `<button class="service-dialog-close" type="button" aria-label="Close service details">×</button><p class="section-kicker">Service overview</p><h2 id="service-dialog-title">${detail.title}</h2><p class="service-dialog-intro">${detail.intro}</p><div class="service-dialog-points"><section><h3>What to consider</h3><p>${detail.focus}</p></section><section><h3>How NSIPL can help</h3><p>${detail.approach}</p></section></div><a class="button button-primary" href="contact.html">Discuss this requirement</a>`;
+    serviceDialog.showModal();
+    serviceDialog.querySelector('.service-dialog-close').focus();
+  };
+
+  serviceCards.forEach((card) => {
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-haspopup', 'dialog');
+    card.setAttribute('aria-label', `Open details for ${card.querySelector('h3')?.textContent || 'this service'}`);
+    card.addEventListener('click', () => showServiceDetail(card.dataset.service));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showServiceDetail(card.dataset.service); }
+    });
+  });
+
+  serviceDialog.addEventListener('click', (event) => {
+    if (event.target === serviceDialog || event.target.closest('.service-dialog-close')) serviceDialog.close();
+  });
+}
+
+if (window.location.pathname.endsWith('/digital-launch.html')) {
+  const digitalHero = document.querySelector('.page-hero');
+  if (digitalHero) {
+    digitalHero.insertAdjacentHTML('afterend', `<section class="digital-3d-panel section" aria-labelledby="digital-3d-title"><div><p class="section-kicker">Digital experience</p><h2 id="digital-3d-title">One clear experience, designed for every screen.</h2><p>Responsive delivery keeps the business message consistent across desktop, tablet and mobile—while the content, interface and final scope remain tailored to the client.</p></div><picture><source type="image/webp" srcset="assets/visuals/digital-launch-3d-800.webp 800w, assets/visuals/digital-launch-3d-1360.webp 1360w" sizes="(max-width: 760px) 100vw, 48vw"><img src="assets/approach-plan.jpg" width="1360" height="765" loading="lazy" decoding="async" alt="Three-dimensional visual of a responsive website across desktop, tablet and mobile devices."></picture></section>`);
+  }
+}
 
 const footer = document.querySelector('footer');
 const footerLinks = [
@@ -67,13 +167,13 @@ if (footer) {
       </div>
       <div class="footer-explore">
         <p class="footer-label">Explore</p>
-        <nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="neotimex.html">NeoTimex</a><a href="approach.html">Approach</a><a href="contact.html">Contact</a></nav>
+        <nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="neotimex.html">NeoTimex</a><a href="approach.html">Approach</a><a href="contact.html">Contact</a><a href="https://www.veonit.com/terms-and-conditions/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a><a href="https://www.veonit.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a></nav>
       </div>
       <div class="footer-connect">
         <p class="footer-label">Connect</p>
         <p>Begin with your site, system needs or attendance workflow.</p>
         <a class="footer-contact" href="contact.html">Talk to Neo Systems <span aria-hidden="true">↗</span></a>
-        <small>Contact details will be added following approval.</small>
+        <div class="footer-contact-details"><a href="tel:+917499711255"><span>Mobile</span>+91 7499711255</a><a href="mailto:info.neosystems@gmail.com"><span>Email</span>info.neosystems@gmail.com</a></div>
       </div>
     </div>
     <div class="footer-bottom"><span>© ${year} Neo Systems. All rights reserved.</span><div><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a></div></div>
