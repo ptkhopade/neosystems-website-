@@ -7,6 +7,17 @@ const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#site-nav');
 const header = document.querySelector('.site-header');
 
+// A single navigation shell across every static route.
+document.body.classList.add('v5-home');
+if (header && nav) {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const activePage = currentPage === 'approach.html' ? 'about.html' : currentPage;
+  const navItem = (href, label) => `<a${href === activePage ? ' class="active" aria-current="page"' : ''} href="${href}">${label}</a>`;
+  header.classList.add('v5-header');
+  header.querySelector('.wordmark')?.replaceWith(Object.assign(document.createElement('a'), { className: 'brand-logo', href: 'index.html', innerHTML: '<img class="brand-logo-mark" src="assets/neo-systems-logo.svg" width="56" height="56" alt=""><span class="brand-logo-copy"><b>NSIPL</b><small>Neo Systems &amp; Infrastructure Pvt. Ltd.</small></span>' }));
+  nav.innerHTML = `${navItem('index.html', 'Home')}${navItem('services.html', 'Solutions')}${navItem('neotimex.html', 'NeoTimex')}${navItem('digital-launch.html', 'Digital Launch')}${navItem('about.html', 'About')}${navItem('contact.html', 'Contact')}<a class="nav-cta" href="contact.html">Get in Touch <span aria-hidden="true">→</span></a>`;
+}
+
 const updateHeaderElevation = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
 updateHeaderElevation();
 window.addEventListener('scroll', updateHeaderElevation, { passive: true });
@@ -146,7 +157,7 @@ if (window.location.pathname === '/' || window.location.pathname.endsWith('/inde
   const homeHeader = document.querySelector('.site-header');
   if (homeHeader) {
     homeHeader.classList.add('v5-header');
-    homeHeader.querySelector('.wordmark')?.replaceWith(Object.assign(document.createElement('a'), { className: 'brand-logo', href: 'index.html', innerHTML: '<img src="assets/neo-systems-infrastructure-logo.png" width="600" height="181" alt="Neo Systems &amp; Infrastructure Pvt. Ltd.">' }));
+    homeHeader.querySelector('.wordmark')?.replaceWith(Object.assign(document.createElement('a'), { className: 'brand-logo', href: 'index.html', innerHTML: '<img class="brand-logo-mark" src="assets/neo-systems-logo.svg" width="56" height="56" alt=""><span class="brand-logo-copy"><b>NSIPL</b><small>Neo Systems &amp; Infrastructure Pvt. Ltd.</small></span>' }));
     nav.innerHTML = '<a class="active" aria-current="page" href="index.html">Home</a><a href="services.html">Solutions</a><a href="neotimex.html">NeoTimex</a><a href="digital-launch.html">Digital Launch</a><a href="about.html">About</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Get in Touch <span aria-hidden="true">→</span></a>';
   }
   const main = document.querySelector('main');
@@ -217,7 +228,7 @@ if (window.location.pathname.endsWith('/contact.html') && contactMain) {
         <a href="services.html"><span>01</span><strong>CCTV & surveillance services</strong><b>↗</b></a>
         <a href="services.html#planning"><span>02</span><strong>Planning & procurement guidance</strong><b>↗</b></a>
         <a href="neotimex.html"><span>03</span><strong>NeoTimex product enquiries</strong><b>↗</b></a>
-        <div class="contact-approval"><strong>Contact Neo Systems</strong><p><a href="tel:+917499711255">+91 74997 11255</a><br /><a href="mailto:info.neosystems@gmail.com">info.neosystems@gmail.com</a><br /><a href="https://wa.me/917499711255?text=Hello%20Neo%20Systems%2C%20I%20would%20like%20to%20discuss%20a%20requirement." target="_blank" rel="noopener noreferrer">Message us on WhatsApp ↗</a></p><p><strong>Visit us</strong><br />Avadhoot Complex, Shop No. 2, Sr. No. 32/11, Ambegaon Pathar Road, Bharati Vidyapeeth, Pune - 411 046.</p></div>
+        <div class="contact-approval"><strong>Contact Neo Systems</strong><p><a href="tel:+917499711255">+91 74997 11255</a><br /><a href="mailto:info.neosystems@gmail.com">info.neosystems@gmail.com</a><br /><a href="https://wa.me/917499711255?text=Hello%20Neo%20Systems%2C%20I%20would%20like%20to%20discuss%20a%20requirement." target="_blank" rel="noopener noreferrer">Message us on WhatsApp ↗</a></p><p><strong>Visit us</strong><br />Avadhoot Complex, Office No 2, Sr No 32, Bharti VidyaPeeth, Ambegaon, Maharastra Pune-411046</p></div>
       </aside>
       <section class="inquiry-panel" aria-labelledby="inquiry-title">
         <p class="section-kicker">Inquiry details</p>
@@ -243,7 +254,7 @@ if (window.location.pathname.endsWith('/contact.html') && contactMain) {
   });
 }
 
-if (document.body.classList.contains('v5-home') && footer) {
+if (footer) {
   footer.className = 'site-footer';
-  footer.innerHTML = `<div class="footer-main v5-footer"><div class="footer-brand"><a href="index.html"><img src="assets/neo-systems-logo.svg" width="255" height="59" alt="NSIPL"></a><p>Neo Systems &amp; Infrastructure Pvt. Ltd. delivers practical technology solutions for more secure, connected and digital businesses.</p></div><div class="footer-explore"><p class="footer-label">Quick Links</p><nav aria-label="Footer links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav></div><div class="footer-explore"><p class="footer-label">Our Solutions</p><nav aria-label="Footer solutions"><a href="services.html">Security &amp; Surveillance</a><a href="services.html">IT Infrastructure</a><a href="neotimex.html">NeoTimex</a><a href="digital-launch.html">Digital Launch</a></nav></div><div class="footer-connect"><p class="footer-label">Contact Us</p><a href="tel:+917499711255">+91 74997 11255</a><a href="mailto:info.neosystems@gmail.com">info.neosystems@gmail.com</a><p>Avadhoot Complex, Ambegaon Pathar Road, Pune - 411 046.</p><a href="https://wa.me/917499711255" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} Neo Systems &amp; Infrastructure Pvt. Ltd. All Rights Reserved.</span><div><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div>`;
+  footer.innerHTML = `<div class="footer-main v5-footer"><div class="footer-brand"><a class="footer-logo" href="index.html"><img class="footer-logo-mark" src="assets/neo-systems-logo.svg" width="56" height="56" alt=""><span><b>NSIPL</b><small>Neo Systems &amp; Infrastructure Pvt. Ltd.</small></span></a><p>Neo Systems &amp; Infrastructure Pvt. Ltd. delivers practical technology solutions for more secure, connected and digital businesses.</p></div><div class="footer-explore"><p class="footer-label">Quick Links</p><nav aria-label="Footer links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav></div><div class="footer-explore"><p class="footer-label">Our Solutions</p><nav aria-label="Footer solutions"><a href="services.html">Security &amp; Surveillance</a><a href="services.html">IT Infrastructure</a><a href="neotimex.html">NeoTimex</a><a href="digital-launch.html">Digital Launch</a></nav></div><div class="footer-connect"><p class="footer-label">Contact Us</p><a href="tel:+917499711255">+91 74997 11255</a><a href="mailto:info.neosystems@gmail.com">info.neosystems@gmail.com</a><p>Avadhoot Complex, Office No 2, Sr No 32, Bharti VidyaPeeth, Ambegaon, Maharastra Pune-411046</p><a href="https://wa.me/917499711255" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} Neo Systems &amp; Infrastructure Pvt. Ltd. All Rights Reserved.</span><div><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div>`;
 }
