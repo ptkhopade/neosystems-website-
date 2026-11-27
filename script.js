@@ -45,7 +45,7 @@ if (!nav.querySelector('.mobile-whatsapp-link')) {
   mobileWhatsAppLink.href = 'https://wa.me/917499711255?text=Hello%20Neo%20Systems%2C%20I%20would%20like%20to%20discuss%20a%20requirement.';
   mobileWhatsAppLink.target = '_blank';
   mobileWhatsAppLink.rel = 'noopener noreferrer';
-  mobileWhatsAppLink.innerHTML = '<span>WhatsApp Neo Systems</span>+91 7499711255';
+  mobileWhatsAppLink.innerHTML = '<span class="whatsapp-symbol" aria-hidden="true">☎</span><span class="mobile-whatsapp-copy"><span>WhatsApp Neo Systems</span>+91 7499711255</span>';
   nav.appendChild(mobileWhatsAppLink);
 }
 
@@ -140,6 +140,25 @@ if (window.location.pathname.endsWith('/digital-launch.html')) {
   }
 }
 
+// Approved V5 homepage composition. Kept here to preserve the shared static-site architecture.
+if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')) {
+  document.body.classList.add('v5-home');
+  const homeHeader = document.querySelector('.site-header');
+  if (homeHeader) {
+    homeHeader.classList.add('v5-header');
+    homeHeader.querySelector('.wordmark')?.replaceWith(Object.assign(document.createElement('a'), { className: 'brand-logo', href: 'index.html', innerHTML: '<img src="assets/neo-systems-infrastructure-logo.png" width="600" height="181" alt="Neo Systems &amp; Infrastructure Pvt. Ltd.">' }));
+    nav.innerHTML = '<a class="active" aria-current="page" href="index.html">Home</a><a href="services.html">Solutions</a><a href="neotimex.html">NeoTimex</a><a href="digital-launch.html">Digital Launch</a><a href="about.html">About</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Get in Touch <span aria-hidden="true">→</span></a>';
+  }
+  const main = document.querySelector('main');
+  if (main) main.innerHTML = `
+    <section class="v5-hero" id="top" aria-labelledby="hero-title"><picture class="v5-hero-image"><source type="image/webp" srcset="assets/home/security-enterprise-800.webp 800w, assets/home/security-enterprise-1360.webp 1360w" sizes="100vw"><img src="assets/surveillance-hero.jpg" width="1440" height="810" fetchpriority="high" decoding="async" alt="CCTV camera and secure IT infrastructure in a modern business environment."></picture><div class="v5-shell hero-content"><h1 id="hero-title">Technology That<br>Protects, Connects &amp;<br><em>Powers Your Business.</em></h1><p>End-to-end solutions in security and surveillance, IT infrastructure, workforce solutions, and digital services to help businesses operate more securely, efficiently, and digitally.</p><div class="hero-actions"><a class="button button-primary" href="services.html">Explore Our Solutions <span aria-hidden="true">→</span></a><a class="button button-outline" href="contact.html">Contact Us</a></div></div></section>
+    <section class="v5-shell solutions-strip" aria-label="NSIPL solutions"><a class="solution-card" href="services.html#security"><span class="solution-icon">◉</span><span><strong>Security &amp;<br>Surveillance</strong><small>CCTV, IP Cameras,<br>Access Control</small></span><b>→</b></a><a class="solution-card" href="services.html#infrastructure"><span class="solution-icon">▤</span><span><strong>IT Infrastructure</strong><small>Networking, Systems<br>&amp; Technical Support</small></span><b>→</b></a><a class="solution-card" href="neotimex.html"><span class="solution-icon">♟</span><span><strong>NeoTimex</strong><small>Employee Management<br>&amp; Payroll Solution</small></span><b>→</b></a><a class="solution-card" href="digital-launch.html"><span class="solution-icon">◎</span><span><strong>Digital Launch</strong><small>Website Development<br>&amp; SEO</small></span><b>→</b></a></section>
+    <section class="v5-shell v5-benefits" aria-labelledby="why-title"><div class="benefits-copy"><h2 id="why-title">Why NSIPL</h2><p>Reliable technology solutions. Measurable business impact.</p></div><div class="benefit-grid"><article><span>♢</span><h3>Trusted &amp; Reliable</h3><p>Secure and dependable solutions.</p></article><article><span>⚙</span><h3>End-to-End Expertise</h3><p>From setup to support.</p></article><article><span>⌁</span><h3>Business-Centric</h3><p>Solutions for your growth.</p></article><article><span>↗</span><h3>Future-Ready</h3><p>Built for tomorrow.</p></article></div></section>
+    <section class="v5-shell location-wrap"><div class="location-card"><div><span class="location-pin">●</span><h2>Our Service Locations</h2><p>NSIPL operates from Pune, Maharashtra, supporting confirmed onsite and remote requirements.</p><a class="coverage-button" href="contact.html">Check Coverage Areas <span aria-hidden="true">→</span></a></div><div class="india-mark" aria-hidden="true">INDIA</div></div></section>
+    <section class="v5-shell feature-panel neotimex-panel" aria-labelledby="neo-title"><div class="feature-copy"><p class="panel-label">Mobile-First Solution</p><h2 id="neo-title">Neo<span>Timex</span></h2><h3>Employee Management &amp; Payroll</h3><p>A mobile-first solution to simplify employee attendance, workforce management, leave tracking, and salary administration.</p><ul><li>Employee &amp; Attendance Management</li><li>Leave &amp; Shift Management</li><li>Salary &amp; Payroll Processing</li><li>Employee &amp; Admin Access</li></ul><a class="button button-primary" href="neotimex.html">Explore NeoTimex <span aria-hidden="true">→</span></a></div><div class="product-visual"><img src="assets/neotimex-hero.jpg" width="1440" height="810" loading="lazy" decoding="async" alt="NeoTimex mobile-first attendance product illustration."></div></section>
+    <section class="v5-shell feature-panel digital-panel" aria-labelledby="digital-title"><div class="feature-copy"><h2 id="digital-title">Digital Launch</h2><p>Professional, mobile-ready websites designed to help businesses establish a stronger digital presence.</p><ul><li>Modern &amp; Responsive Design</li><li>SEO Ready</li><li>Business Enquiry Integration</li><li>Affordable Website Packages</li></ul><a class="button button-primary" href="digital-launch.html">Explore Website Packages <span aria-hidden="true">→</span></a></div><div class="product-visual"><picture><source type="image/webp" srcset="assets/digital-launch/responsive-web-design-800.webp 800w, assets/digital-launch/responsive-web-design-1360.webp 1360w" sizes="(max-width: 760px) 100vw, 47vw"><img src="assets/approach-plan.jpg" width="1360" height="765" loading="lazy" decoding="async" alt="Responsive website design shown across desktop and mobile devices."></picture></div></section>`;
+}
+
 const footer = document.querySelector('footer');
 const footerLinks = [
   ['Contact Us', 'contact.html'],
@@ -222,4 +241,9 @@ if (window.location.pathname.endsWith('/contact.html') && contactMain) {
     event.preventDefault();
     inquiryForm.querySelector('.form-status').textContent = 'Inquiry routing will be enabled once the approved Neo Systems contact channel is added.';
   });
+}
+
+if (document.body.classList.contains('v5-home') && footer) {
+  footer.className = 'site-footer';
+  footer.innerHTML = `<div class="footer-main v5-footer"><div class="footer-brand"><a href="index.html"><img src="assets/neo-systems-logo.svg" width="255" height="59" alt="NSIPL"></a><p>Neo Systems &amp; Infrastructure Pvt. Ltd. delivers practical technology solutions for more secure, connected and digital businesses.</p></div><div class="footer-explore"><p class="footer-label">Quick Links</p><nav aria-label="Footer links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav></div><div class="footer-explore"><p class="footer-label">Our Solutions</p><nav aria-label="Footer solutions"><a href="services.html">Security &amp; Surveillance</a><a href="services.html">IT Infrastructure</a><a href="neotimex.html">NeoTimex</a><a href="digital-launch.html">Digital Launch</a></nav></div><div class="footer-connect"><p class="footer-label">Contact Us</p><a href="tel:+917499711255">+91 74997 11255</a><a href="mailto:info.neosystems@gmail.com">info.neosystems@gmail.com</a><p>Avadhoot Complex, Ambegaon Pathar Road, Pune - 411 046.</p><a href="https://wa.me/917499711255" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} Neo Systems &amp; Infrastructure Pvt. Ltd. All Rights Reserved.</span><div><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div>`;
 }
